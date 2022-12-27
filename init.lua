@@ -200,8 +200,8 @@ require('nvim-cursorline').setup {
 
 -- NERDCommenter
 
-vim.keymap.set("n", "<C-_>", vim.cmd.NERDCommenterToggle)
-vim.keymap.set("v", "<C-_>", vim.cmd.NERDCommenterToggle)
+vim.keymap.set("n", "<C-_>", "<plug>NERDCommenterToggle<CR>")
+vim.keymap.set("v", "<C-_>", "<plug>NERDCommenterToggle<CR>")
 
 
 -- Terminal
