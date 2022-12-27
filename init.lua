@@ -76,6 +76,10 @@ require('packer').startup(function(use)
 	use 'echasnovski/mini.nvim'
 	use 'beauwilliams/statusline.lua'
 	use 'yamatsum/nvim-cursorline'
+	use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+	use 'preservim/nerdcommenter'
+	use "numToStr/FTerm.nvim"
+	use 'lewis6991/gitsigns.nvim'
 end)
 
 -- Theme
@@ -182,14 +186,46 @@ statusline.tabline = false
 -- Cursorline
 
 require('nvim-cursorline').setup {
-  cursorline = {
-    enable = true,
-    timeout = 1000,
-    number = false,
-  },
-  cursorword = {
-    enable = true,
-    min_length = 3,
-    hl = { underline = true },
-  }
+	cursorline = {
+		enable = true,
+		timeout = 1000,
+		number = false,
+	},
+	cursorword = {
+		enable = true,
+		min_length = 3,
+		hl = { underline = true },
+	}
+}
+
+-- NERDCommenter
+
+vim.keymap.set("n", "<C-_>", vim.cmd.NERDCommenterToggle)
+vim.keymap.set("v", "<C-_>", vim.cmd.NERDCommenterToggle)
+
+
+-- Terminal
+
+require 'FTerm'.setup({
+	border     = 'double',
+	dimensions = {
+		height = 0.9,
+		width = 0.9,
+	},
+})
+vim.keymap.set('n', '<C-t>', '<CMD>lua require("FTerm").toggle()<CR>')
+vim.keymap.set('t', '<C-t>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
+
+
+-- Gitsigns
+
+require('gitsigns').setup {
+	current_line_blame = true,
+	current_line_blame_opts = {
+		virt_text = true,
+		virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+		delay = 1000,
+		ignore_whitespace = false,
+	},
+	current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
 }
